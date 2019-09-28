@@ -1,0 +1,33 @@
+[tierapp:vars]
+
+###########################################################################
+### Ansible Vars
+###########################################################################
+timeout=60
+ansible_become=yes
+ansible_user=ec2-user
+ansible_ssh_private_key_file="~/.ssh/5cb5key.pem"
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"
+
+[frontends]
+## These are the frontends
+frontend1.5cb5.internal ansible_host=frontend1.5cb5.example.opentlc.com
+
+[apps]
+## These are the apps
+app1.5cb5.internal ansible_host=app1.5cb5.example.opentlc.com
+app2.5cb5.internal ansible_host=app2.5cb5.example.opentlc.com
+
+[appdbs]
+## These are the appdbs
+appdb1.5cb5.internal ansible_host=appdb1.5cb5.example.opentlc.com
+
+## These are the support
+[support]
+support1.5cb5.internal ansible_host=support1.5cb5.example.opentlc.com
+
+[tierapp:children]
+frontends
+apps
+appdbs
+support
